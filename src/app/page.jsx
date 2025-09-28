@@ -24,7 +24,8 @@ const EVYApp = () => {
       rating: 4.8,
       status: 'available',
       lat: 13.7563,
-      lng: 100.5018
+      lng: 100.5018,
+      location:'https://www.google.com/maps/dir//%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99+%E0%B9%81%E0%B8%A5%E0%B8%B0+%E0%B8%AD%E0%B8%B5%E0%B8%A7%E0%B8%B5+%E0%B8%9B%E0%B8%95%E0%B8%97.%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99+1323+%E0%B8%96.+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88+4+%E0%B9%81%E0%B8%82%E0%B8%A7%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88+%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%99+%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3+10330/@19.0318719,99.8949598,3271m/data=!3m1!1e3!4m10!4m9!1m1!4e2!1m5!1m1!1s0x30e29916093b5f61:0xb3c1c30d315b0173!2m2!1d100.5249486!2d13.734663!3e2?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
     },
     {
       id: 2,
@@ -39,7 +40,8 @@ const EVYApp = () => {
       rating: 4.6,
       status: 'available',
       lat: 13.7460,
-      lng: 100.5340
+      lng: 100.5340,
+      location:'https://www.google.com/maps/dir//%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99+%E0%B9%81%E0%B8%A5%E0%B8%B0+%E0%B8%AD%E0%B8%B5%E0%B8%A7%E0%B8%B5+%E0%B8%9B%E0%B8%95%E0%B8%97.%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99+1323+%E0%B8%96.+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88+4+%E0%B9%81%E0%B8%82%E0%B8%A7%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88+%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%99+%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3+10330/@19.0318719,99.8949598,3271m/data=!3m1!1e3!4m10!4m9!1m1!4e2!1m5!1m1!1s0x30e29916093b5f61:0xb3c1c30d315b0173!2m2!1d100.5249486!2d13.734663!3e2?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
     },
     {
       id: 3,
@@ -54,7 +56,8 @@ const EVYApp = () => {
       rating: 4.9,
       status: 'busy',
       lat: 13.7307,
-      lng: 100.5418
+      lng: 100.5418,
+      location:'https://www.google.com/maps/dir//%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99+%E0%B9%81%E0%B8%A5%E0%B8%B0+%E0%B8%AD%E0%B8%B5%E0%B8%A7%E0%B8%B5+%E0%B8%9B%E0%B8%95%E0%B8%97.%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99+1323+%E0%B8%96.+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88+4+%E0%B9%81%E0%B8%82%E0%B8%A7%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88+%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%99+%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3+10330/@19.0318719,99.8949598,3271m/data=!3m1!1e3!4m10!4m9!1m1!4e2!1m5!1m1!1s0x30e29916093b5f61:0xb3c1c30d315b0173!2m2!1d100.5249486!2d13.734663!3e2?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
     }
   ];
 
@@ -556,7 +559,9 @@ const EVYApp = () => {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  alert('โทรหาสถานี');
+                  if (selectedStation?.location) {
+                        window.open(selectedStation.location, '_blank');
+                      }
                 }}
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
