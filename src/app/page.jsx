@@ -24,8 +24,7 @@ const EVYApp = () => {
       rating: 4.8,
       status: 'available',
       lat: 13.7563,
-      lng: 100.5018,
-      location:'https://www.google.com/maps/dir//%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99+%E0%B9%81%E0%B8%A5%E0%B8%B0+%E0%B8%AD%E0%B8%B5%E0%B8%A7%E0%B8%B5+%E0%B8%9B%E0%B8%95%E0%B8%97.%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99+1323+%E0%B8%96.+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88+4+%E0%B9%81%E0%B8%82%E0%B8%A7%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88+%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%99+%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3+10330/@19.0318719,99.8949598,3271m/data=!3m1!1e3!4m10!4m9!1m1!4e2!1m5!1m1!1s0x30e29916093b5f61:0xb3c1c30d315b0173!2m2!1d100.5249486!2d13.734663!3e2?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
+      lng: 100.5018
     },
     {
       id: 2,
@@ -39,9 +38,9 @@ const EVYApp = () => {
       power: '22-50 kW',
       rating: 4.6,
       status: 'available',
-      lat: 13.7460,
-      lng: 100.5340,
-      location:'https://www.google.com/maps/dir/19.0318734,99.8949544/Total+Access+Communication+PLC.,+286%2F24,+Pahonyothin+Road,+Tambon+Mae+Tam+Amphoe+Muang+Payao,+56000/@19.0824452,99.9059407,13078m/data=!3m2!1e3!4b1!4m19!1m8!3m7!1s0x30d82d37acd036c1:0x9a4e4c46bbe2b42!2sTotal+Access+Communication+PLC.!8m2!3d19.136229!4d99.910226!15sCiBldiBzdGF0aW9uIOC5g-C4geC4peC5ieC4ieC4seC4mSIDkAEBkgEhZWxlY3RyaWNfdmVoaWNsZV9jaGFyZ2luZ19zdGF0aW9uqgFaEAEqDiIKZXYgc3RhdGlvbig1Mh8QASIbGLmHZL8rDyNrWw_--4l503frD8FMtMuXptUTMiUQAiIhZXYgc3RhdGlvbiDguYPguIHguKXguYkg4LiJ4Lix4LiZ4AEA!16s%2Fg%2F1pzrgqrz5!4m9!1m1!4e1!1m5!1m1!1s0x30d82d37acd036c1:0x9a4e4c46bbe2b42!2m2!1d99.910226!2d19.136229!3e0?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
+      lat: 19.136111,
+      lng: 99.91
+
     },
     {
       id: 3,
@@ -55,9 +54,8 @@ const EVYApp = () => {
       power: '350 kW',
       rating: 4.9,
       status: 'busy',
-      lat: 13.7307,
-      lng: 100.5418,
-      location:'https://www.google.com/maps/dir//%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99+%E0%B9%81%E0%B8%A5%E0%B8%B0+%E0%B8%AD%E0%B8%B5%E0%B8%A7%E0%B8%B5+%E0%B8%9B%E0%B8%95%E0%B8%97.%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99+1323+%E0%B8%96.+%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88+4+%E0%B9%81%E0%B8%82%E0%B8%A7%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88+%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B1%E0%B8%99+%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3+10330/@19.0318719,99.8949598,3271m/data=!3m1!1e3!4m10!4m9!1m1!4e2!1m5!1m1!1s0x30e29916093b5f61:0xb3c1c30d315b0173!2m2!1d100.5249486!2d13.734663!3e2?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D'
+      lat: 19.0828495,
+      lng: 99.7411272
     }
   ];
 
@@ -549,7 +547,7 @@ const EVYApp = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (!selectedStation?.location) return;
+                  if (!selectedStation?.lat || !selectedStation?.lng) return;
 
                   // ใช้ Geolocation API ดึงตำแหน่งผู้ใช้
                   if (navigator.geolocation) {
@@ -557,8 +555,8 @@ const EVYApp = () => {
                       (position) => {
                         const { latitude, longitude } = position.coords;
 
-                        // สร้างลิงก์ Google Maps จากตำแหน่งปัจจุบันไปยัง selectedStation
-                        const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${encodeURIComponent(selectedStation.location)}`;
+                        // สร้างลิงก์ Google Maps จากตำแหน่งปัจจุบันไปยังพิกัดสถานี
+                        const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${selectedStation.lat},${selectedStation.lng}`;
                         window.open(mapsUrl, '_blank');
                       },
                       (error) => {
