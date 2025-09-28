@@ -230,7 +230,7 @@ const EVYApp = () => {
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <span className="text-gray-600 text-sm">ตำแหน่งปัจจุบัน:</span>
-            <span className="font-medium text-sm">{vehicleLocation.address}</span>
+            <span className="font-medium text-sm text-black">{vehicleLocation.address}</span>
           </div>
           
           <div className="flex justify-between items-center">
@@ -243,7 +243,7 @@ const EVYApp = () => {
           
           <div className="flex justify-between items-center">
             <span className="text-gray-600 text-sm">ระยะที่เหลือ:</span>
-            <span className="font-medium text-sm">~245 กม.</span>
+            <span className="font-medium text-sm text-black">~245 กม.</span>
           </div>
         </div>
         
@@ -323,7 +323,7 @@ const EVYApp = () => {
                 type="number"
                 value={batteryCapacity}
                 onChange={(e) => setBatteryCapacity(parseFloat(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded-md text-sm"
+                className="w-full p-2 border border-gray-300 rounded-md text-sm text-black"
               />
             </div>
             
@@ -336,7 +336,7 @@ const EVYApp = () => {
                 step="0.1"
                 value={pricePerKwh}
                 onChange={(e) => setPricePerKwh(parseFloat(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded-md text-sm"
+                className="w-full p-2 border border-gray-300 rounded-md text-sm text-black"
               />
             </div>
           </div>
