@@ -549,7 +549,9 @@ const EVYApp = () => {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  alert('เปิดแอพนำทาง');
+                  if (selectedStation?.location) {
+                        window.open(selectedStation.location, '_blank');
+                      }
                 }}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
@@ -559,9 +561,7 @@ const EVYApp = () => {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (selectedStation?.location) {
-                        window.open(selectedStation.location, '_blank');
-                      }
+                  alert('โทรหาสถานี');
                 }}
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
