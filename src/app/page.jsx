@@ -546,12 +546,28 @@ const EVYApp = () => {
             </div>
             
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (selectedStation?.location) {
-                        window.open(selectedStation.location, '_blank');
+                  if (!selectedStation?.location) return;
+
+                  // ใช้ Geolocation API ดึงตำแหน่งผู้ใช้
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                      (position) => {
+                        const { latitude, longitude } = position.coords;
+
+                        // สร้างลิงก์ Google Maps จากตำแหน่งปัจจุบันไปยัง selectedStation
+                        const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${encodeURIComponent(selectedStation.location)}`;
+                        window.open(mapsUrl, '_blank');
+                      },
+                      (error) => {
+                        alert('ไม่สามารถเข้าถึงตำแหน่งของคุณได้');
                       }
+                    );
+                  } else {
+                    alert('เบราว์เซอร์ของคุณไม่รองรับการระบุตำแหน่ง');
+                  }
                 }}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
