@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Zap, Navigation, Star, Clock, Phone, Filter, Menu, User, Heart, Battery, Car } from 'lucide-react';
+import { Search, MapPin, Zap, Navigation, Star, Phone, Filter, Menu, User, Heart, Battery, Car } from 'lucide-react';
 import Image from 'next/image';
 const EVYApp = () => {
   const [activeTab, setActiveTab] = useState('map');
@@ -163,7 +163,6 @@ const EVYApp = () => {
             <h1 className="text-xl font-bold">EVY</h1>
           </div>
           <button className="p-2">
-            <User className="w-6 h-6" />
           </button>
         </div>
         
