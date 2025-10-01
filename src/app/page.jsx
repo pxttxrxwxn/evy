@@ -240,7 +240,7 @@ const EVYApp = () => {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 relative mb-16">
+      <div className="flex-1 relative mb-18">
         {activeTab === 'map' && (
           <div className="absolute inset-0">
             <iframe
