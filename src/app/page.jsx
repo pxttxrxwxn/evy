@@ -158,7 +158,7 @@ const EVYApp = () => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             <div className="bg-white bg-opacity-20 p-2 rounded-[50%]">
-              <Image src="/LOGO.png" alt="EVY Logo" width={40} height={40} />
+              <Image src="/LOGO.png" alt="EVY Logo" width={24} height={24} />
             </div>
             <h1 className="text-xl font-bold">EVY</h1>
           </div>
