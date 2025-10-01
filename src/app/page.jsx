@@ -382,18 +382,19 @@ const EVYApp = () => {
 
       {/* Station Detail Modal + Map */}
       {selectedStation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50 max-w-md mx-auto">
-          <div className="bg-white w-full rounded-t-2xl p-6 max-h-96 overflow-y-auto">
+        <div className="fixed inset-0 bg-white/20 backdrop-blur-md flex items-end justify-center z-50 p-4 sm:p-6">
+          <div className="bg-white w-full sm:w-96 md:w-[450px] lg:w-[550px] rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto">
+            {/* Header */}
             <div className="flex justify-between items-start mb-4">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{selectedStation.name}</h3>
-                <p className="text-gray-600 mb-3">{selectedStation.address}</p>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="flex items-center gap-1 text-sm text-black">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">{selectedStation.name}</h3>
+                <p className="text-gray-600 mb-3 text-sm sm:text-base">{selectedStation.address}</p>
+                <div className="flex flex-wrap items-center gap-4 mb-4 text-sm sm:text-base">
+                  <span className="flex items-center gap-1 text-black">
                     <MapPin className="w-4 h-4 text-gray-500" />
                     {selectedStation.distance}
                   </span>
-                  <span className="flex items-center gap-1 text-sm text-black">
+                  <span className="flex items-center gap-1 text-black">
                     <Star className="w-4 h-4 text-yellow-500" />
                     {selectedStation.rating} (124 รีวิว)
                   </span>
@@ -409,14 +410,15 @@ const EVYApp = () => {
                 ×
               </button>
             </div>
-            
+
+            {/* Info Grid */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="bg-gray-50 p-3 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
                   <Battery className="w-4 h-4 text-green-600" />
                   <span className="text-sm font-medium text-black">ความพร้อม</span>
                 </div>
-                <p className="text-lg font-bold text-green-600">
+                <p className="text-lg sm:text-xl font-bold text-green-600">
                   {selectedStation.available}/{selectedStation.total} ว่าง
                 </p>
               </div>
@@ -425,21 +427,19 @@ const EVYApp = () => {
                   <Zap className="w-4 h-4 text-blue-600" />
                   <span className="text-sm font-medium text-black">ราคา</span>
                 </div>
-                <p className="text-lg font-bold text-blue-600">{selectedStation.price}</p>
+                <p className="text-lg sm:text-xl font-bold text-blue-600">{selectedStation.price}</p>
               </div>
             </div>
 
             {/* ปุ่มนำทางและโทร */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => {
                   if (!selectedStation?.lat || !selectedStation?.lng) return;
-
                   if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                       (position) => {
                         const { latitude, longitude } = position.coords;
-
                         const mapsAppUrl = `google.maps://?saddr=${latitude},${longitude}&daddr=${selectedStation.lat},${selectedStation.lng}`;
                         const mapsWebUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${selectedStation.lat},${selectedStation.lng}`;
                         window.location.href = mapsAppUrl;
