@@ -8,7 +8,23 @@ const EVYApp = () => {
   const [selectedStation, setSelectedStation] = useState(null);
   const [showFilter, setShowFilter] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [mapUrl, setMapUrl] = useState('');
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          setMapUrl(`https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          setMapUrl("https://www.google.com/maps?q=19.032433,99.893658&z=15&output=embed");
+        }
+      );
+    }
+  }, []);
   // Mock data สถานีชาร์จ
   const stations = [
     {
@@ -28,8 +44,8 @@ const EVYApp = () => {
     },
     {
       id: 2,
-      name: 'PEA VOLTA Siam Paragon',
-      address: '991 Rama I Road, Pathumwan, Bangkok',
+      name: 'Total Access Communication PLC.',
+      address: '286/24, Pahonyothin Road, Tambon Mae Tam Amphoe Muang Payao, 56000',
       distance: '1.2 km',
       available: 2,
       total: 6,
@@ -38,8 +54,9 @@ const EVYApp = () => {
       power: '22-50 kW',
       rating: 4.6,
       status: 'available',
-      lat: 13.7460,
-      lng: 100.5340
+      lat: 19.136111,
+      lng: 99.91
+
     },
     {
       id: 3,
@@ -53,8 +70,8 @@ const EVYApp = () => {
       power: '350 kW',
       rating: 4.9,
       status: 'busy',
-      lat: 13.7307,
-      lng: 100.5418
+      lat: 19.0828495,
+      lng: 99.7411272
     }
   ];
 
@@ -67,155 +84,20 @@ const EVYApp = () => {
   };
 
   const MapView = () => (
-    <div className="relative h-full bg-green-50 overflow-hidden">
-      {/* Map Background - Bangkok Style */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-100 via-blue-50 to-green-100">
-        {/* River (Chao Phraya) */}
-        <div className="absolute top-0 left-1/3 w-8 h-full bg-blue-200 transform rotate-12 opacity-60"></div>
-        <div className="absolute top-0 left-1/3 w-6 h-full bg-blue-300 transform rotate-12 opacity-40 ml-1"></div>
-        
-        {/* Major Roads */}
-        <div className="absolute top-1/4 left-0 w-full h-1 bg-gray-400 opacity-70"></div>
-        <div className="absolute top-2/4 left-0 w-full h-2 bg-gray-500 opacity-70"></div>
-        <div className="absolute top-3/4 left-0 w-full h-1 bg-gray-400 opacity-70"></div>
-        
-        <div className="absolute left-1/4 top-0 w-1 h-full bg-gray-400 opacity-70"></div>
-        <div className="absolute left-2/4 top-0 w-2 h-full bg-gray-500 opacity-70"></div>
-        <div className="absolute left-3/4 top-0 w-1 h-full bg-gray-400 opacity-70"></div>
-        
-        {/* BTS/MRT Lines */}
-        <div className="absolute top-1/3 left-0 w-full h-0.5 bg-green-600 opacity-60"></div>
-        <div className="absolute left-1/2 top-0 w-0.5 h-full bg-blue-600 opacity-60"></div>
-        
-        {/* Districts/Areas */}
-        <div className="absolute top-8 left-8 w-20 h-16 bg-yellow-100 rounded opacity-50">
-          <div className="text-xs text-gray-600 p-1">จตุจักร</div>
-        </div>
-        <div className="absolute top-16 right-12 w-24 h-20 bg-pink-100 rounded opacity-50">
-          <div className="text-xs text-gray-600 p-1">สยาม</div>
-        </div>
-        <div className="absolute bottom-20 left-4 w-28 h-18 bg-purple-100 rounded opacity-50">
-          <div className="text-xs text-gray-600 p-1">สีลม</div>
-        </div>
-        <div className="absolute bottom-12 right-8 w-26 h-16 bg-orange-100 rounded opacity-50">
-          <div className="text-xs text-gray-600 p-1">อโศก</div>
-        </div>
-        
-        {/* Parks */}
-        <div className="absolute top-1/2 left-16 w-12 h-12 bg-green-200 rounded-full opacity-60"></div>
-        <div className="absolute top-20 right-20 w-10 h-10 bg-green-200 rounded-full opacity-60"></div>
-      </div>
-
-      {/* EV Charging Stations */}
-      {stations.map((station, index) => {
-        const positions = [
-          { top: '25%', left: '30%' }, // PTT Central World
-          { top: '45%', left: '60%' }, // PEA Siam Paragon  
-          { top: '65%', right: '25%' } // EA EmQuartier
-        ];
-        const position = positions[index] || { top: '50%', left: '50%' };
-        
-        return (
-          <div
-            key={station.id}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-            style={position}
-            onClick={() => setSelectedStation(station)}
-          >
-            {/* Station Pin */}
-            <div className={`relative ${station.status === 'available' ? 'animate-pulse' : ''}`}>
-              <div className={`w-8 h-8 rounded-full shadow-lg flex items-center justify-center ${
-                station.status === 'available' 
-                  ? 'bg-green-500 hover:bg-green-600' 
-                  : 'bg-red-500 hover:bg-red-600'
-              } transition-colors`}>
-                <Zap className="w-4 h-4 text-white" />
-              </div>
-              
-              {/* Availability Badge */}
-              <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs font-bold flex items-center justify-center text-white ${
-                station.status === 'available' ? 'bg-green-600' : 'bg-red-600'
-              }`}>
-                {station.available}
-              </div>
-              
-              {/* Pulse Effect for Available Stations */}
-              {station.status === 'available' && (
-                <div className="absolute inset-0 rounded-full bg-green-400 opacity-50 animate-ping"></div>
-              )}
-            </div>
-            
-            {/* Station Info Popup on Hover */}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg p-2 min-w-32 opacity-0 hover:opacity-100 transition-opacity z-10 pointer-events-none">
-              <h4 className="text-xs font-semibold text-gray-800 mb-1">{station.name}</h4>
-              <p className="text-xs text-gray-600">{station.available}/{station.total} ว่าง</p>
-              <p className="text-xs text-blue-600 font-medium">{station.price}</p>
-            </div>
-          </div>
-        );
-      })}
-
-      {/* User Location */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="relative">
-          <div className="w-4 h-4 bg-blue-600 rounded-full shadow-lg border-2 border-white"></div>
-          <div className="absolute inset-0 bg-blue-400 rounded-full opacity-30 animate-ping"></div>
-        </div>
-      </div>
-
-      {/* Distance Circles */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="w-32 h-32 border border-blue-300 rounded-full opacity-30"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-blue-400 rounded-full opacity-40"></div>
-      </div>
-      
-      {/* Map Controls */}
-      <div className="absolute top-4 right-4 flex flex-col gap-2">
-        <button className="bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-colors">
-          <Navigation className="w-5 h-5 text-gray-700" />
-        </button>
-        <button className="bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-colors">
-          <MapPin className="w-5 h-5 text-gray-700" />
-        </button>
-        <button className="bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-colors">
-          <span className="text-lg font-bold text-gray-700">+</span>
-        </button>
-        <button className="bg-white hover:bg-gray-50 p-3 rounded-full shadow-lg transition-colors">
-          <span className="text-lg font-bold text-gray-700">-</span>
-        </button>
-      </div>
-
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3">
-        <h4 className="text-xs font-semibold text-gray-800 mb-2">สถานีชาร์จ</h4>
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-          <span className="text-xs text-gray-600">ว่าง</span>
-        </div>
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <span className="text-xs text-gray-600">เต็ม</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-          <span className="text-xs text-gray-600">ตำแหน่งของคุณ</span>
-        </div>
-      </div>
-
-      {/* Search Overlay */}
-      <div className="absolute top-4 left-4 right-20">
-        <div className="bg-white rounded-lg shadow-md p-2 flex items-center gap-2">
-          <Search className="w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="ค้นหาสถานที่บนแผนที่"
-            className="flex-1 text-sm outline-none text-gray-700"
+      <div className="h-full w-full">
+        {mapUrl ? (
+          <iframe
+            src={mapUrl}
+            className="w-full h-full border-0"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
-        </div>
+        ) : (
+          <p className="text-center mt-10 text-gray-500">กำลังโหลดแผนที่...</p>
+        )}
       </div>
-    </div>
-  );
-
+    );
   const StationCard = ({ station }) => (
     <div 
       className="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow"
@@ -274,7 +156,7 @@ const EVYApp = () => {
   );
 
   return (
-    <div className="max-w-md mx-auto bg-gray-50 h-screen overflow-hidden">
+    <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-green-600 text-white p-4 pb-6">
         <div className="flex justify-between items-center mb-4">
@@ -362,8 +244,17 @@ const EVYApp = () => {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 overflow-hidden pb-20">
-        {activeTab === 'map' && <MapView />}
+      <div className="flex-1 relative mb-16">
+        {activeTab === 'map' && (
+          <div className="absolute inset-0">
+            <iframe
+              src={mapUrl || "https://www.google.com/maps?q=19.032433,99.893658&z=15&output=embed"}
+              className="w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        )}
         
         {activeTab === 'search' && (
           <div className="p-4 h-full overflow-y-auto">
@@ -493,7 +384,7 @@ const EVYApp = () => {
         )}
       </div>
 
-      {/* Station Detail Modal */}
+      {/* Station Detail Modal + Map */}
       {selectedStation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50 max-w-md mx-auto">
           <div className="bg-white w-full rounded-t-2xl p-6 max-h-96 overflow-y-auto">
@@ -541,12 +432,26 @@ const EVYApp = () => {
                 <p className="text-lg font-bold text-blue-600">{selectedStation.price}</p>
               </div>
             </div>
-            
+
+            {/* ปุ่มนำทางและโทร */}
             <div className="flex gap-3">
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  alert('เปิดแอพนำทาง');
+              <button
+                onClick={() => {
+                  if (!selectedStation?.lat || !selectedStation?.lng) return;
+
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                      (position) => {
+                        const { latitude, longitude } = position.coords;
+
+                        const mapsAppUrl = `google.maps://?saddr=${latitude},${longitude}&daddr=${selectedStation.lat},${selectedStation.lng}`;
+                        const mapsWebUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${selectedStation.lat},${selectedStation.lng}`;
+                        window.location.href = mapsAppUrl;
+                        setTimeout(() => window.open(mapsWebUrl, "_blank"), 500);
+                      },
+                      () => alert("ไม่สามารถเข้าถึงตำแหน่งของคุณได้")
+                    );
+                  } else alert("เบราว์เซอร์ของคุณไม่รองรับการระบุตำแหน่ง");
                 }}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
@@ -554,10 +459,7 @@ const EVYApp = () => {
                 นำทาง
               </button>
               <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  alert('โทรหาสถานี');
-                }}
+                onClick={() => alert('โทรหาสถานี')}
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
@@ -567,59 +469,27 @@ const EVYApp = () => {
           </div>
         </div>
       )}
-
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 bg-white border-t border-gray-200 px-4 py-2 w-full max-w-md">
-        <div className="flex justify-around">
-          <button 
-            onClick={() => setActiveTab('map')}
-            className={`flex flex-col items-center py-2 ${
-              activeTab === 'map' ? 'text-blue-600' : 'text-gray-600'
-            }`}
-          >
-            <MapPin className="w-5 h-5 mb-1" />
-            <span className="text-xs">แผนที่</span>
-          </button>
-          
-          <button 
-            onClick={() => setActiveTab('search')}
-            className={`flex flex-col items-center py-2 ${
-              activeTab === 'search' ? 'text-blue-600' : 'text-gray-600'
-            }`}
-          >
-            <Search className="w-5 h-5 mb-1" />
-            <span className="text-xs">ค้นหา</span>
-          </button>
-          
-          <button 
-            onClick={() => setActiveTab('route')}
-            className={`flex flex-col items-center py-2 ${
-              activeTab === 'route' ? 'text-blue-600' : 'text-gray-600'
-            }`}
-          >
-            <Car className="w-5 h-5 mb-1" />
-            <span className="text-xs">เดินทาง</span>
-          </button>
-          
-          <button 
-            onClick={() => setActiveTab('favorites')}
-            className={`flex flex-col items-center py-2 ${
-              activeTab === 'favorites' ? 'text-blue-600' : 'text-gray-600'
-            }`}
-          >
-            <Heart className="w-5 h-5 mb-1" />
-            <span className="text-xs">โปรด</span>
-          </button>
-          
-          <button 
-            onClick={() => setActiveTab('profile')}
-            className={`flex flex-col items-center py-2 ${
-              activeTab === 'profile' ? 'text-blue-600' : 'text-gray-600'
-            }`}
-          >
-            <User className="w-5 h-5 mb-1" />
-            <span className="text-xs">โปรไฟล์</span>
-          </button>
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 w-full">
+        <div className="flex justify-around max-w-7xl mx-auto">
+          {[
+            { id: 'map', label: 'แผนที่', icon: MapPin },
+            { id: 'search', label: 'ค้นหา', icon: Search },
+            { id: 'route', label: 'เดินทาง', icon: Car },
+            { id: 'favorites', label: 'โปรด', icon: Heart },
+            { id: 'profile', label: 'โปรไฟล์', icon: User }
+          ].map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              onClick={() => setActiveTab(id)}
+              className={`flex flex-col items-center py-2 sm:py-3 transition-colors ${
+                activeTab === id ? 'text-blue-600' : 'text-gray-600'
+              }`}
+            >
+              <Icon className="w-5 h-5 sm:w-6 sm:h-6 mb-1" />
+              <span className="text-xs sm:text-sm">{label}</span>
+            </button>
+          ))}
         </div>
       </div>
     </div>
