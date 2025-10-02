@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Zap, Navigation, Star, Phone, Filter, Menu, User, Heart, Battery, Car } from 'lucide-react';
+import { Search, MapPin, Zap, Navigation, Star, Phone, Filter, Menu, User, Heart, Battery, Car, Tickets, Brain } from 'lucide-react';
 import Image from 'next/image';
 const EVYApp = () => {
   const [activeTab, setActiveTab] = useState('map');
@@ -160,7 +160,15 @@ const EVYApp = () => {
             <div className="bg-white bg-opacity-20 p-2 rounded-[50%]">
               <Image src="/LOGO.png" alt="EVY Logo" width={24} height={24} />
             </div>
-            <h1 className="text-xl font-bold">EVY</h1>
+            <h1 className="text-xl font-bold flex items-center gap-2">EVY - PLATINUM 
+              <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              height="24px" 
+              viewBox="0 -960 960 960" 
+              width="24px" 
+              fill="#e0eeee">
+                <path d="M200-160v-80h560v80H200Zm0-140-51-321q-2 0-4.5.5t-4.5.5q-25 0-42.5-17.5T80-680q0-25 17.5-42.5T140-740q25 0 42.5 17.5T200-680q0 7-1.5 13t-3.5 11l125 56 125-171q-11-8-18-21t-7-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820q0 15-7 28t-18 21l125 171 125-56q-2-5-3.5-11t-1.5-13q0-25 17.5-42.5T820-740q25 0 42.5 17.5T880-680q0 25-17.5 42.5T820-620q-2 0-4.5-.5t-4.5-.5l-51 321H200Zm68-80h424l26-167-105 46-133-183-133 183-105-46 26 167Zm212 0Z"/></svg>
+            </h1>
           </div>
           <button className="p-2">
           </button>
@@ -173,7 +181,14 @@ const EVYApp = () => {
             type="text"
             placeholder="ค้นหาสถานีชาร์จ หรือ สถานที่"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              if (e.target.value.trim() !== '') {
+                setActiveTab("search");
+              } else {
+                setActiveTab("map");
+              }
+              }}
             className="w-full pl-10 pr-12 py-3 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
           />
           <button 
@@ -328,7 +343,6 @@ const EVYApp = () => {
             </div>
           </div>
         )}
-        
         {activeTab === 'favorites' && (
           <div className="p-4 h-full overflow-y-auto">
             <h2 className="font-semibold text-gray-800 mb-4">รายการโปรด</h2>
@@ -347,30 +361,58 @@ const EVYApp = () => {
         )}
         
         {activeTab === 'profile' && (
-          <div className="p-4 h-full overflow-y-auto">
-            <div className="text-center py-8">
-              <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <User className="w-10 h-10 text-blue-600" />
+          <div className="relative p-6 h-full overflow-y-auto bg-gradient-to-b from-blue-50 via-white to-gray-50">
+            <div className="text-center py-10">
+
+              {/* Avatar */}
+              <div className="relative w-28 h-28 mx-auto mb-6">
+                <div className="w-28 h-28 bg-gradient-to-tr from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                  <User className="w-14 h-14 text-white" />
+                </div>
+                <span className="absolute bottom-2 right-2 bg-green-500 w-6 h-6 rounded-full border-3 border-white shadow"></span>
               </div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">สวัสดี!</h2>
-              <p className="text-gray-600 mb-6">ผู้ใช้ EVY</p>
-              
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg text-left">
-                  <h3 className="font-medium text-gray-800 mb-2">การใช้งาน</h3>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p>• สถานีที่ใช้: 12 แห่ง</p>
-                    <p>• ระยะทางรวม: 1,234 กม.</p>
-                    <p>• พลังงานประหยัด: 245 kWh</p>
+
+              {/* User Info */}
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-1">สวัสดี! 👋</h2>
+              <p className="text-gray-500 mb-8 text-lg">ผู้ใช้ EVY Premium</p>
+
+              {/* Usage Section */}
+              <div className="space-y-6 max-w-md mx-auto">
+                <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-6 text-left border border-gray-100 hover:shadow-xl transition">
+                  <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2 text-lg">
+                    📊 การใช้งาน
+                  </h3>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="text-2xl font-bold text-blue-600">12</p>
+                      <p className="text-xs text-gray-500">สถานี</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-indigo-600">1,234</p>
+                      <p className="text-xs text-gray-500">กม.</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-green-600">245</p>
+                      <p className="text-xs text-gray-500">kWh</p>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="bg-gray-50 p-4 rounded-lg text-left">
-                  <h3 className="font-medium text-gray-800 mb-2">การตั้งค่า</h3>
-                  <div className="space-y-2">
-                    <button className="w-full text-left text-sm text-gray-600 py-2">แจ้งเตือน</button>
-                    <button className="w-full text-left text-sm text-gray-600 py-2">ภาษา</button>
-                    <button className="w-full text-left text-sm text-gray-600 py-2">เกี่ยวกับ</button>
+
+                {/* Settings Section */}
+                <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-6 text-left border border-gray-100 hover:shadow-xl transition">
+                  <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2 text-lg">
+                    ⚙️ การตั้งค่า
+                  </h3>
+                  <div className="divide-y divide-gray-200">
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      🔔 <span>แจ้งเตือน</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      🌐 <span>ภาษา</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      ℹ️ <span>เกี่ยวกับ</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -469,9 +511,9 @@ const EVYApp = () => {
         <div className="flex justify-around max-w-7xl mx-auto">
           {[
             { id: 'map', label: 'แผนที่', icon: MapPin },
-            { id: 'search', label: 'ค้นหา', icon: Search },
+            { id: 'AI', label: 'AI Planner', icon: Brain },
             { id: 'route', label: 'เดินทาง', icon: Car },
-            { id: 'favorites', label: 'โปรด', icon: Heart },
+            { id: 'coupon', label: 'คูปอง', icon: Tickets  },
             { id: 'profile', label: 'โปรไฟล์', icon: User }
           ].map(({ id, label, icon: Icon }) => (
             <button

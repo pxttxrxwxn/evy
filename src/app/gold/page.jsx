@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Zap, Navigation, Star, Phone, Filter, Menu, User, Heart, Battery, Car } from 'lucide-react';
+import { Search, MapPin, Zap, Navigation, Star, Phone, Filter, Menu, User, Heart, Battery, Car, Tickets, Brain } from 'lucide-react';
 import Image from 'next/image';
+import Swal from "sweetalert2";
 const EVYApp = () => {
   const [activeTab, setActiveTab] = useState('map');
   const [searchQuery, setSearchQuery] = useState('');
@@ -161,7 +162,13 @@ const EVYApp = () => {
               <Image src="/LOGO.png" alt="EVY Logo" width={24} height={24} />
             </div>
             <h1 className="text-xl font-bold flex items-center gap-2">EVY - GOLD 
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffd700"><path d="M480-120 80-600l120-240h560l120 240-400 480Zm-95-520h190l-60-120h-70l-60 120Zm55 347v-267H218l222 267Zm80 0 222-267H520v267Zm144-347h106l-60-120H604l60 120Zm-474 0h106l60-120H250l-60 120Z"/></svg>
+              <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              height="24px" 
+              viewBox="0 -960 960 960" 
+              width="24px" 
+              fill="#ffd700">
+                <path d="M480-120 80-600l120-240h560l120 240-400 480Zm-95-520h190l-60-120h-70l-60 120Zm55 347v-267H218l222 267Zm80 0 222-267H520v267Zm144-347h106l-60-120H604l60 120Zm-474 0h106l60-120H250l-60 120Z"/></svg>
             </h1>
           </div>
           <button className="p-2">
@@ -175,7 +182,14 @@ const EVYApp = () => {
             type="text"
             placeholder="ค้นหาสถานีชาร์จ หรือ สถานที่"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              if (e.target.value.trim() !== '') {
+                setActiveTab("search");
+              } else {
+                setActiveTab("map");
+              }
+              }}
             className="w-full pl-10 pr-12 py-3 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
           />
           <button 
@@ -349,30 +363,58 @@ const EVYApp = () => {
         )}
         
         {activeTab === 'profile' && (
-          <div className="p-4 h-full overflow-y-auto">
-            <div className="text-center py-8">
-              <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <User className="w-10 h-10 text-blue-600" />
+          <div className="relative p-6 h-full overflow-y-auto bg-gradient-to-b from-blue-50 via-white to-gray-50">
+            <div className="text-center py-10">
+
+              {/* Avatar */}
+              <div className="relative w-28 h-28 mx-auto mb-6">
+                <div className="w-28 h-28 bg-gradient-to-tr from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                  <User className="w-14 h-14 text-white" />
+                </div>
+                <span className="absolute bottom-2 right-2 bg-green-500 w-6 h-6 rounded-full border-3 border-white shadow"></span>
               </div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">สวัสดี!</h2>
-              <p className="text-gray-600 mb-6">ผู้ใช้ EVY</p>
-              
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg text-left">
-                  <h3 className="font-medium text-gray-800 mb-2">การใช้งาน</h3>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p>• สถานีที่ใช้: 12 แห่ง</p>
-                    <p>• ระยะทางรวม: 1,234 กม.</p>
-                    <p>• พลังงานประหยัด: 245 kWh</p>
+
+              {/* User Info */}
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-1">สวัสดี! 👋</h2>
+              <p className="text-gray-500 mb-8 text-lg">ผู้ใช้ EVY GOLD</p>
+
+              {/* Usage Section */}
+              <div className="space-y-6 max-w-md mx-auto">
+                <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-6 text-left border border-gray-100 hover:shadow-xl transition">
+                  <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2 text-lg">
+                    📊 การใช้งาน
+                  </h3>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="text-2xl font-bold text-blue-600">12</p>
+                      <p className="text-xs text-gray-500">สถานี</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-indigo-600">1,234</p>
+                      <p className="text-xs text-gray-500">กม.</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-green-600">245</p>
+                      <p className="text-xs text-gray-500">kWh</p>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="bg-gray-50 p-4 rounded-lg text-left">
-                  <h3 className="font-medium text-gray-800 mb-2">การตั้งค่า</h3>
-                  <div className="space-y-2">
-                    <button className="w-full text-left text-sm text-gray-600 py-2">แจ้งเตือน</button>
-                    <button className="w-full text-left text-sm text-gray-600 py-2">ภาษา</button>
-                    <button className="w-full text-left text-sm text-gray-600 py-2">เกี่ยวกับ</button>
+
+                {/* Settings Section */}
+                <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-6 text-left border border-gray-100 hover:shadow-xl transition">
+                  <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2 text-lg">
+                    ⚙️ การตั้งค่า
+                  </h3>
+                  <div className="divide-y divide-gray-200">
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      🔔 <span>แจ้งเตือน</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      🌐 <span>ภาษา</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 text-left text-base text-gray-700 py-3 px-2 hover:bg-gray-50 rounded-lg transition">
+                      ℹ️ <span>เกี่ยวกับ</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -468,27 +510,41 @@ const EVYApp = () => {
       )}
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 w-full">
-        <div className="flex justify-around max-w-7xl mx-auto">
-          {[
-            { id: 'map', label: 'แผนที่', icon: MapPin },
-            { id: 'search', label: 'ค้นหา', icon: Search },
-            { id: 'route', label: 'เดินทาง', icon: Car },
-            { id: 'favorites', label: 'โปรด', icon: Heart },
-            { id: 'profile', label: 'โปรไฟล์', icon: User }
-          ].map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => setActiveTab(id)}
-              className={`flex flex-col items-center py-2 sm:py-3 transition-colors ${
-                activeTab === id ? 'text-blue-600' : 'text-gray-600'
-              }`}
-            >
-              <Icon className="w-5 h-5 sm:w-6 sm:h-6 mb-1" />
-              <span className="text-xs sm:text-sm">{label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+              <div className="flex justify-around max-w-7xl mx-auto">
+                {[
+                  { id: "map", label: "แผนที่", icon: MapPin },
+                  { id: "AI", label: "AI Planner", icon: Brain },
+                  { id: "route", label: "เดินทาง", icon: Car },
+                  { id: "coupon", label: "คูปอง", icon: Tickets },
+                  { id: "profile", label: "โปรไฟล์", icon: User },
+                ].map(({ id, label, icon: Icon }) => (
+                  <button
+                    key={id}
+                    onClick={() => {
+                      if (id === "AI") {
+                        Swal.fire({
+                          title: "กรุณาสมัครสมาชิกPlatinumก่อนใช้งาน",
+                          icon: "error",
+                          draggable: true,
+                        }).then(() => {
+                          setActiveTab("map");
+                        });
+                      } else {
+                        setActiveTab(id);
+                      }
+                    }}
+                    className={`flex flex-col items-center py-2 sm:py-3 transition-colors ${
+                      activeTab === id && id !== "AI"
+                        ? "text-blue-600"
+                        : "text-gray-600"
+                    }`}
+                  >
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 mb-1" />
+                    <span className="text-xs sm:text-sm">{label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
     </div>
   );
 };
