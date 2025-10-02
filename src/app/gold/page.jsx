@@ -160,7 +160,9 @@ const EVYApp = () => {
             <div className="bg-white bg-opacity-20 p-2 rounded-[50%]">
               <Image src="/LOGO.png" alt="EVY Logo" width={24} height={24} />
             </div>
-            <h1 className="text-xl font-bold">EVY - GOLD</h1>
+            <h1 className="text-xl font-bold flex items-center gap-2">EVY - GOLD 
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffd700"><path d="M480-120 80-600l120-240h560l120 240-400 480Zm-95-520h190l-60-120h-70l-60 120Zm55 347v-267H218l222 267Zm80 0 222-267H520v267Zm144-347h106l-60-120H604l60 120Zm-474 0h106l60-120H250l-60 120Z"/></svg>
+            </h1>
           </div>
           <button className="p-2">
           </button>
