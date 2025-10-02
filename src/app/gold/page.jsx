@@ -160,7 +160,7 @@ const EVYApp = () => {
             <div className="bg-white bg-opacity-20 p-2 rounded-[50%]">
               <Image src="/LOGO.png" alt="EVY Logo" width={24} height={24} />
             </div>
-            <h1 className="text-xl font-bold">EVY</h1>
+            <h1 className="text-xl font-bold">EVY - GOLD</h1>
           </div>
           <button className="p-2">
           </button>
