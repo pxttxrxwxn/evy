@@ -28,7 +28,6 @@ const EVYApp = () => {
       name: 'PTT Station Central World',
       address: '999/9 Rama I Road, Pathumwan, Bangkok',
       distance: '0.8 km',
-      available: 3,
       total: 4,
       price: '8 บาท/kWh',
       chargerType: 'DC Fast',
@@ -43,7 +42,6 @@ const EVYApp = () => {
       name: 'Total Access Communication PLC.',
       address: '286/24, Pahonyothin Road, Tambon Mae Tam Amphoe Muang Payao, 56000',
       distance: '1.2 km',
-      available: 2,
       total: 6,
       price: '7.5 บาท/kWh',
       chargerType: 'AC/DC',
@@ -59,13 +57,12 @@ const EVYApp = () => {
       name: 'EA Anywhere EmQuartier',
       address: '693 Sukhumvit Road, Khlong Toei, Bangkok',
       distance: '2.1 km',
-      available: 0,
       total: 4,
       price: '9 บาท/kWh',
       chargerType: 'DC Ultra Fast',
       power: '350 kW',
       rating: 4.9,
-      status: 'busy',
+      status: 'available',
       lat: 19.0828495,
       lng: 99.7411272
     }
@@ -139,7 +136,7 @@ const EVYApp = () => {
               : 'bg-red-100 text-red-700'
           }`}>
             <Zap className="w-3 h-3" />
-            {station.available}/{station.total} ว่าง
+            {station.total} หัวชาร์จ
           </div>
           <span className="text-xs text-gray-500">{station.chargerType}</span>
         </div>
@@ -415,10 +412,10 @@ const EVYApp = () => {
               <div className="bg-gray-50 p-3 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
                   <Battery className="w-4 h-4 text-green-600" />
-                  <span className="text-sm font-medium text-black">ความพร้อม</span>
+                  <span className="text-sm font-medium text-black">หัวชาร์จทั้งหมด</span>
                 </div>
                 <p className="text-lg sm:text-xl font-bold text-green-600">
-                  {selectedStation.available}/{selectedStation.total} ว่าง
+                  {selectedStation.total} หัวชาร์จ
                 </p>
               </div>
               <div className="bg-gray-50 p-3 rounded-lg">
