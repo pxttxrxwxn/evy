@@ -9,6 +9,7 @@ const EVYApp = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [mapUrl, setMapUrl] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState("ทั้งหมด");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -71,6 +72,42 @@ const EVYApp = () => {
     }
   ];
 
+  // ฟังก์ชันกรองข้อมูล
+  const getFilteredStations = () => {
+    if (selectedFilter === "ทั้งหมด") {
+      return stations; // แสดงทุกสถานี
+    }
+
+    let result = stations;
+
+    switch (selectedFilter) {
+      case "DC Fast":
+        result = stations.filter(s => s.chargerType.includes("DC Fast"));
+        break;
+      case "Ultra Fast":
+        result = stations.filter(s => s.chargerType.includes("Ultra Fast"));
+        break;
+      case "ว่าง":
+        result = stations.filter(s => s.status === "available");
+        break;
+      case "ใกล้ที่สุด":
+        result = [...stations].sort(
+          (a, b) => parseFloat(a.distance) - parseFloat(b.distance)
+        );
+        break;
+      case "ราคาถูก":
+        result = [...stations].sort(
+          (a, b) => parseFloat(a.price) - parseFloat(b.price)
+        );
+        break;
+      default:
+        result = stations;
+    }
+
+    return result;
+  };
+
+  const filteredStations = getFilteredStations();
   const toggleFavorite = (stationId) => {
     setFavorites(prev => 
       prev.includes(stationId) 
@@ -221,7 +258,16 @@ const EVYApp = () => {
         <div className="bg-white p-4 border-b border-gray-200 text-black">
           <div className="flex gap-2 flex-wrap">
             {['ทั้งหมด', 'DC Fast', 'Ultra Fast', 'ว่าง', 'ใกล้ที่สุด', 'ราคาถูก'].map((filter) => (
-              <button key={filter} className="px-3 py-1 bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-full text-sm transition-colors">
+              <button 
+                key={filter} 
+                onClick={() => {
+                  setSelectedFilter(filter);
+                  setActiveTab("search");}}
+                className={`px-3 py-1 rounded-full text-sm transition-colors 
+                  ${selectedFilter === filter 
+                    ? "bg-blue-100 text-blue-600" 
+                    : "bg-gray-100 hover:bg-blue-100 hover:text-blue-600"}`}
+              >
                 {filter}
               </button>
             ))}
@@ -279,13 +325,20 @@ const EVYApp = () => {
                 <p className="text-sm text-gray-600">ใส่คำค้นหาในช่องด้านบนเพื่อค้นหาสถานีชาร์จ</p>
               </div>
               
-              {searchQuery && (
+              {(searchQuery !== "" || selectedFilter) && (
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-3">ผลลัพธ์สำหรับ "{searchQuery}"</h4>
-                  {stations
+                  <h4 className="text-sm font-medium text-gray-700 mb-3">
+                    {searchQuery 
+                      ? `ผลลัพธ์สำหรับ "${searchQuery}"`
+                      : `ผลการกรอง: ${selectedFilter}`}
+                  </h4>
+
+                  {filteredStations
                     .filter(station => 
-                      station.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      station.address.toLowerCase().includes(searchQuery.toLowerCase())
+                      searchQuery 
+                        ? (station.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          station.address.toLowerCase().includes(searchQuery.toLowerCase()))
+                        : true
                     )
                     .map(station => (
                       <StationCard key={station.id} station={station} />
